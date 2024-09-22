@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width-width, intiial-scale=1.0">
+        <title>Line Control with Mouse</title>
+        <style>
+            body {
+                margin: 0;
+            }
+            canvas {
+                display: block;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="myCanvas"></canvas>
+        <script>
+            // Get the canvas and context
+            const canvas = document.getElementById('myCanvas');
+            const ctx = canvas.getContext('2d');
+
+            // Set canvas size to the full window
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            // Fixed point (start of the line)
+            const fixedX = canvas.width / 2;
+            const fixedY = canvas.height / 2;
+
+            // Update line position with mouse movement
+            canvas.addEventListener('mousemove', (e) => {
+                // Clear the canvas
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // Get mouse position
+                const mouseX = e.clientX;
+                const mouseY = e.clientY;
+
+                // Draw the line from the fixed point to the mouse position
+                ctx.beginPath();
+                ctx.moveTo(fixedX, fixedY); // Fixed point
+                ctx.lineTo(mouseX, mouseY); // Mouse-controlled point
+                ctx.strokeStyle = 'black';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                ctx.closePath();
+            });
+        </script>
+    </body>
+</html>
